@@ -8,10 +8,10 @@ const deleteBook = require("./delete-book");
 
 const router = Router();
 
-router.use("/:id", getBook);
-router.use("/", getBooks);
-router.use("/", postBook);
-router.use("/:id", putBook);
-router.use("/:id", deleteBook);
+router.get("/:id", getBook);
+router.get("/", getBooks);
+router.post("/", postBook);
+router.put("/:id", putBook);
+router.delete("/:id", deleteBook);
 
 module.exports = router;
