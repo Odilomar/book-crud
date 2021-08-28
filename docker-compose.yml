@@ -1,0 +1,47 @@
+version: "3"
+
+networks:
+  book-network:
+    driver: bridge
+
+services:
+  db:
+    image: postgres
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "book"
+    networks:
+      - book-network
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
+
+  # backend:
+  #   container_name: clean_arch_backend
+  #   image: clean_arch_backend:1.0.0
+  #   restart: on-failure
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     NODE_ENV: "docker"
+  #     DB_HOST: "db"
+  #     DB_PORT: "5432"
+  #     DB_USER: "postgres"
+  #     DB_PASS: "postgres"
+  #     DB_NAME: "clean"
+  #   networks:
+  #     - book-network
+  #   depends_on:
+  #     - db
+  #   command: bash -c "./wait-for-it.sh db:5432 -- npm start"
