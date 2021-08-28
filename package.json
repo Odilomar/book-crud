@@ -5,8 +5,14 @@
   "repository": "git@github.com:Odilomar/book-crud.git",
   "author": "Odilomar <odilomarjunior.contact@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/infrastructure/index.js"
+  },
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
