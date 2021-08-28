@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      freezeTableName: true,
       modelName: config.tables.book,
+      paranoid: true,
     }
   );
   return Book;
